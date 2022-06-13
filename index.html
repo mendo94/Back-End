@@ -1,15 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <main>
+    <h1>Enter Task</h1>
+    <input type="text" id="taskTextBox" placeholder="Enter tasks here" />
+    <input type="text" id="priorityTextBox" placeholder="Enter priority here" />
+    <input type="text" id="dateBox" placeholder="Enter date here" />
+    <!-- <select name="priority" id="prioritySelection">
+      <option value="">Select Priorty Level</option>
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+    </select> -->
+    <button id="taskAddButton">Add</button>
 
+    <h4>Pending tasks</h4>
+    <ul id="todoUL">
+      <!-- <div> -->
+      <!-- <input type="checkbox" />
+          <label>Wash the car </label>
+          <button>Remove</button>
+        </div> -->
+    </ul>
+
+
+    <h4>Completed tasks</h4>
+    <ul id="completedUL">
+      <div>
+        <!-- <input type="checkbox" />
+            <label>Wash the car</label>
+            <button>Remove</button>
+          </div> -->
+    </ul>
+  </main>
+  <script src="app.js"></script>
 </body>
 
 </html>

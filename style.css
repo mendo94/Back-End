@@ -1,0 +1,71 @@
+* {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+body {
+  background-color: rgb(240, 27, 215);
+}
+
+h1 {
+  color: white;
+}
+
+h4 {
+  color: white;
+}
+
+div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-weight: bold;
+  color: white;
+  background-color: rgb(197, 38, 205);
+  /* height: 50px; */
+  width: 100%;
+}
+
+input {
+  margin-right: 15px;
+  border: 2px double #00f;
+  /* display: block; */
+  /* background: #ff0000; */
+}
+
+input[type="checkbox"]::before,
+input[type="checkbox"]::after {
+  mix-blend-mode: hard-light;
+  pointer-events: none;
+  /* more style */
+}
+input[type="checkbox"]::before {
+  /* background: green; */
+  content: "✓";
+  color: white;
+  /* more style */
+}
+
+input[type="checkbox"]:checked::after {
+  mix-blend-mode: unset;
+  color: transparent;
+}
+
+button {
+  display: inline-block;
+  background-color: #0bc0dc;
+  border-radius: 10px;
+  border: 4px double #cccccc;
+  color: #eeeeee;
+  text-align: center;
+  font-size: 18px;
+  padding: 10px;
+  width: 100px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 1px;
+  margin-left: 50px;
+}
