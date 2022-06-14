@@ -7,24 +7,22 @@
 <body>
   <main>
     <h1>Enter Task</h1>
+
     <input type="text" id="taskTextBox" placeholder="Enter tasks here" />
-    <input type="text" id="priorityTextBox" placeholder="Enter priority here" />
-    <input type="text" id="dateBox" placeholder="Enter date here" />
-    <!-- <select name="priority" id="prioritySelection">
+    <!-- <input type="text" id="priorityTextBox" placeholder="Enter priority here" /> -->
+    <!-- <input type="text" id="dateBox" placeholder="Enter date here" /> -->
+    <select name="priority" id="prioritySelection">
       <option value="">Select Priorty Level</option>
       <option value="High">High</option>
       <option value="Medium">Medium</option>
       <option value="Low">Low</option>
-    </select> -->
+    </select>
     <button id="taskAddButton">Add</button>
 
     <h4>Pending tasks</h4>
     <ul id="todoUL">
-      <!-- <div> -->
-      <!-- <input type="checkbox" />
-          <label>Wash the car </label>
-          <button>Remove</button>
-        </div> -->
+      <!-- <input type="checkbox" id="taskCheckList" name="taskCheckList" onchange="selectCheckBox()"><label
+        for="taskCheckList"></label> -->
     </ul>
 
 
@@ -37,7 +35,7 @@
           </div> -->
     </ul>
   </main>
-  <script src="app.js"></script>
+  <script src="js/app.js"></script>
 </body>
 
 </html>
