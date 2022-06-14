@@ -1,0 +1,31 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="/css/site.css" />
+</head>
+
+<body>
+  <h1>View Upcoming Trips!</h1>
+
+  <a id="add-trips" href="/create-trip">Add More Trips</a>
+  <ul>
+    {{#allTrips}}
+    <li>
+      <b>You're Going To:</b> {{trip}}
+      <div>
+        <img id="trip-img" src="{{imageURL}}" style="height:150px; width:auto;" />
+      </div>
+      <b>Leaving On:</b> {{departDate}} - <b>Returning On:</b> {{returnDate}}<br><br>
+      <form action="/delete-trip" method="POST">
+        <button name="{{tripId}}" value="{{tripId}}">Delete Trip</button>
+      </form>
+    </li>
+    {{/allTrips}}
+    {{^allTrips}}
+    <h3>Looks like you don't have any upcoming trips... Time to make some plans!</h3>
+    {{/allTrips}}
+
+  </ul>
+</body>
+
+</html>
