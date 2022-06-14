@@ -6,7 +6,11 @@ Instructions:
 
 ## Project 2 - Travel Planner App
 
-Site Preview: <img src="images/project-2.png"/ >
+Site Preview:
+
+<div id="site-preview" align="center">
+  <img src="images/project-2.png" width="100%"/>
+</div>
 
 Instructions:
 
