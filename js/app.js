@@ -7,6 +7,7 @@ const todoUL = document.getElementById("todoUL");
 const completedUL = document.getElementById("completedUL");
 const taskAddButton = document.getElementById("taskAddButton");
 
+taskResults = [];
 taskAddButton.addEventListener("click", function () {
   const title = taskTextBox.value;
   const priority =
@@ -57,7 +58,7 @@ getAllTasks((todos) => {
   displayTasks(todos);
 });
 
-function selectCheckBox(e) {
+function selectCheckBox() {
   const taskCheckList = document.getElementById("taskCheckList");
   const taskMarker = document.getElementById("taskMarker");
 
