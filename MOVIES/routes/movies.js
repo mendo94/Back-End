@@ -44,6 +44,10 @@ router.post("/genre", (req, res) => {
 });
 
 router.post("/more-details", (req, res) => {
+  const movieId = req.body.movieId;
+  console.log(movieId);
+
+  userMovies = userMovies.filter((userMovie) => userMovie.movieId == movieId);
   res.render("more-details", { userMovies: userMovies });
 });
 

@@ -2,6 +2,10 @@
 
 ## Project 1 - To Do List App
 
+Summary:
+
+Create an API with node express to store the user's tasks
+
 Site Preview:
 
 <div id="site-preview" align="center">
@@ -22,6 +26,10 @@ You are also responsible for creating the User Interface for your app which will
 
 ## Project 2 - Travel Planner App
 
+Summary:
+
+Create a backend server using mustache express, gives user ability to create and view travel plans
+
 Site Preview:
 
 <div id="site-preview" align="center">
@@ -41,3 +49,43 @@ Ability to view all the trips
 Ability to delete a trip (Do this last, since deleting a trip is difficult. Hint - You can have multiple forms)
 
 Your app should work on mobile devices
+
+## Project 3 - Movies Website
+
+Summary:
+
+Use mustache express and create routers to allow user to make and view their movie collection
+
+Site Preview:
+
+<div id="site-preview" align="center">
+  <img src="images/project-3.gif" width="100%"/>
+</div>
+
+Instructions:
+
+In this assigment you are going to allow a user to keep track of their movie collection. Create a website which will allow the user perform the following features:
+
+Ability to add a movie (title, description, genre, posterURL)
+
+Ability to view all movies
+
+Ability to delete a movie
+
+Ability to filter movies based on the genre
+
+Ability to go to movie details page
+
+Routes:
+
+/movies - View all movies (Show the poster image and the name of the movie on this age)
+
+/movies/create - POST - Add a new movie
+
+/movies/delete - POST - Deletes a movie
+
+/movies/:movieId - Details about the movie (Show poster image, title, genre and description on this page)
+
+/movies/genre/:genre - Show movies based on genre
+
+Use Express Router to create movies.js route which will contain all the routes of the movies
