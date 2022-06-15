@@ -1,0 +1,32 @@
+<html>
+
+<head>
+  {{!
+  <link rel="stylesheet" href="/css/site.css"> }}
+</head>
+
+<body>
+  <h1>Add a new movie to Collection!</h1>
+
+  <form method="POST" action="/movies/create-movie">
+    <label for="title">Title
+      <input type="text" name="title" id="title" placeholder="Enter name of movie">
+    </label>
+
+    <label for="description">Description
+      <input type="text" name="description" id="description" placeholder="Enter description">
+    </label>
+
+    <label for="genre">Genre
+      <input type="text" name="genre" id="genre" placeholder="Enter genre">
+    </label>
+
+    <label for="posterURL">Movie Cover
+      <input type="text" name="posterURL" id="posterURL" placeholder="Add a picture URL">
+    </label>
+
+    <button>Submit</button>
+  </form>
+</body>
+
+</html>

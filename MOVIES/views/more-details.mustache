@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+</head>
+
+<body>
+  <ul>
+    <li>
+      {{#userMovies}}
+      <div>
+        <img id="movie-img" src="{{posterURL}}" style="height:250px; width:auto;" />
+      </div>
+      <b>Title:</b> {{title}}
+      <p>Description: {{description}}</p>
+      <p>Genre: {{genre}}</p>
+    </li>
+  </ul>
+</body>{{/userMovies}}
+</body>
+
+</html>

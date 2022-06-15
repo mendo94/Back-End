@@ -1,0 +1,51 @@
+<html>
+
+<head>
+  {{!
+  <link rel="stylesheet" href="/css/site.css" /> }}
+</head>
+
+<body>
+  <h1>View Your Collection!</h1>
+
+  <a id="add-movies" href="/movies/create-movie">Add More Movies</a>
+
+  <form method="POST" action="/movies/genre">
+    <select name="genre" id="genre">
+      <option value="">Select Movie Genre</option>
+      <option value="Adventure">Adventure</option>
+      <option value="Comedy">Comedy</option>
+      <option value="Family">Family</option>
+      <option value="Horror">Horror</option>
+      <option value="Romance">Romance</option>
+    </select>
+    <button>Show genres</button>
+  </form>
+  <ul>
+    {{#userMovies}}
+    <li>
+      <div>
+        <img id="movie-img" src="{{posterURL}}" style="height:250px; width:auto;" />
+      </div>
+      <b>Title:</b> {{title}}
+
+      <form method="POST" action="/movies/more-details">
+        <input type="hidden" value={{movieId}} name="movieId" />
+        <button>More Details</a></button>
+      </form>
+
+
+      <form method="POST" action="/movies/delete-movie">
+        <input type="hidden" value={{movieId}} name="movieId" />
+        <button>Delete</button>
+      </form>
+    </li>
+    {{/userMovies}}
+    {{^userMovies}}
+    <h3>Oh No! Your collection is empty!</h3>
+
+    {{/userMovies}}
+  </ul>
+</body>
+
+</html>
