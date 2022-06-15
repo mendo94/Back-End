@@ -2,7 +2,23 @@
 
 ## Project 1 - To Do List App
 
+Site Preview:
+
+<div id="site-preview" align="center">
+  <img src="images/project-1.png" width="100%"/>
+</div>
+
 Instructions:
+
+In this project you are responsible for creating the Web API for TODO app using Node.
+
+Your API will expose the following endpoints:
+
+Get all TODO items (/todos)
+Save a new TODO item (/todos)
+Each TODO item consists of the title, priority, dateCreated
+
+You are also responsible for creating the User Interface for your app which will consume the API.
 
 ## Project 2 - Travel Planner App
 

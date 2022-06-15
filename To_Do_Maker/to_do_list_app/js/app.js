@@ -7,7 +7,8 @@ const todoUL = document.getElementById("todoUL");
 const completedUL = document.getElementById("completedUL");
 const taskAddButton = document.getElementById("taskAddButton");
 
-taskResults = [];
+// taskResults = [];
+
 taskAddButton.addEventListener("click", function () {
   const title = taskTextBox.value;
   const priority =
@@ -47,7 +48,7 @@ function displayTasks(todos) {
   console.log([todos]);
   const taskItems = todos.map((todo) => {
     return `<li id="taskCheckList"><input type="checkbox" id="taskMarker" name="taskMarker" value = "true" onchange="selectCheckBox()">
-    <label for="taskMarker">Task: ${todo.title} - Priority: ${todo.priority} - Created on: ${todo.date}</label></li>
+    <label for="taskMarker"><b>Task:</b> ${todo.title} - <b>Priority:</b> ${todo.priority} - <b>Created on:<b> ${todo.date}</label><button>Delete Task</button></li>
    `;
   });
   todoUL.innerHTML = taskItems.join("");
