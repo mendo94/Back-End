@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mustacheExpress = require("mustache-express");
 const moviesRouter = require("./routes/movies");
+const cors = require("cors");
 
 app.use(express.static("static"));
 
@@ -14,6 +15,9 @@ app.use(express.urlencoded());
 
 app.use("/movies", moviesRouter);
 app.use("/", moviesRouter);
+
+app.use(cors());
+app.use(express.json());
 
 global.userMovies = [
   {

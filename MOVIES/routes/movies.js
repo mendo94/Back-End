@@ -55,4 +55,21 @@ router.get("/more-details", (req, res) => {
   res.render("more-details");
 });
 
+router.post("/api/movies", (req, res) => {
+  const { title, description, genre, posterURL } = req.body;
+
+  userMovies.push({
+    title: title,
+    description: description,
+    genre: genre,
+    posterURL: posterURL,
+  });
+
+  res.json({ success: true, message: "Movie was added" });
+});
+
+router.get("/api/movies", (req, res) => {
+  res.json(userMovies);
+});
+
 module.exports = router;
