@@ -23,8 +23,20 @@ app.use(
   })
 );
 
+function authenticateMiddleware(req, res, next) {
+  if (req.session) {
+    if (req.session.username) {
+      next();
+    } else {
+      res.redirect("/user-login");
+    }
+  } else {
+    res.redirect("/user-login");
+  }
+}
+
 // app.use("/user-login", loginRouter);
-app.use("/movies", moviesRouter);
+app.use("/movies", authenticateMiddleware, moviesRouter);
 app.use("/", moviesRouter);
 
 app.use(cors());
@@ -35,32 +47,20 @@ global.users = [
   { username: "btslover123", password: "password" },
 ];
 
-// function authenticateMiddleware(req, res, next) {
-//   if (req.session) {
-//     if (req.session.username) {
-//       next();
-//     } else {
-//       res.render("/user-login", {
-//         errorMessage: "Invalid username or password",
-//       });
-//     }
-//   } else {
-//     res.render("/user-login", {
-//       errorMessage: "Invalid username or password",
-//     });
-//   }
-// }
-
 app.post("/registration", (req, res) => {
   let { username, password } = req.body;
 
-  users.push({ username: username, password: password });
+  console.log(username);
 
-  res.json({ sucess: true, message: "User created" });
+  const user = { username: username, password: password };
+
+  users.push(user);
+
+  res.redirect("/user-login");
 });
 
 app.get("/registration", (req, res) => {
-  res.render("/registration");
+  res.render("registration");
 });
 
 app.post("/user-login", (req, res) => {
@@ -74,7 +74,7 @@ app.post("/user-login", (req, res) => {
 
   if (persistedUser) {
     if (req.session) {
-      req.session.username = persistedUser.session;
+      req.session.username = persistedUser.username;
     }
     res.redirect("/movies");
   } else {
@@ -84,6 +84,15 @@ app.post("/user-login", (req, res) => {
 
 app.get("/user-login", (req, res) => {
   res.render("user-login");
+});
+
+app.post("/logout", (req, res) => {
+  // destroy session data
+  if (req.session) {
+    req.session.destroy();
+  }
+
+  res.redirect("/user-login");
 });
 
 global.userMovies = [
