@@ -1,18 +1,29 @@
 <html>
 
 <head>
-
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-  <h1>Chat</h1>
+  <h2 id="termsAndConditions"></h2>
+  <div id="chatContainer" class="hidden">
+    <div class="bubbleWrapper">
+      <div class="inlineContainer">
+        <img class="inlineIcon" src="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png">
+        <div class="otherBubble other">
+          <ul id="messagesUL"></ul>
+        </div>
+      </div><span class="other">08:41</span>
+    </div>
 
 
-  <input type="text" id="chatTextBox" placeholder="message" />
 
-  <button id="sendMessageBtn">Send</button>
 
-  <ul id="messagesUL"></ul>
+
+    <input type="text" id="chatTextBox" placeholder="message" />
+    <button id="sendMessageBtn" onclick="getUsername()">Send</button>
+  </div>
+
 
   <script src="/socket.io/socket.io.js"></script>
   <script>

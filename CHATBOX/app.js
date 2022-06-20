@@ -11,6 +11,7 @@ const io = require("socket.io")(http);
 
 app.use(express.static("static"));
 app.use("/js", express.static("static"));
+app.use("/css", express.static("static"));
 
 app.engine("mustache", mustacheExpress());
 app.set("views", "./views");
@@ -46,18 +47,27 @@ app.use("/", moviesRouter);
 app.use(cors());
 app.use(express.json());
 
-// global.users = [
-//   { userId: 1, username: "starkilla", password: "password" },
-//   { userId: 2, username: "btslover123", password: "password" },
-// ];
-global.users = [];
+global.users = [
+  {
+    userId: 1,
+    username: "pappy",
+    password: "1",
+  },
+  {
+    userId: 2,
+    username: "happy",
+    password: "2",
+  },
+];
 
 app.post("/registration", (req, res) => {
-  let { username, password } = req.body;
+  let { userId, username, password } = req.body;
 
-  console.log(username);
-
-  const user = { username: username, password: password };
+  const user = {
+    userId: users.length + 1,
+    username: username,
+    password: password,
+  };
 
   users.push(user);
 
@@ -108,23 +118,29 @@ io.on("connection", (socket) => {
 });
 
 app.post("/chatroom", (req, res) => {
-  // let userz = JSON.stringify(users);
-  // for (let i = 0; i < users.length; i++) {
-  //   console.log(users[i].username);
-  // }
   res.sendFile(__dirname + "/views/chatroom.html");
 });
 
-app.post("/chatroom/chat", (req, res) => {
-  const { username } = req.body;
+app.get("/chatroom", (req, res) => {
+  res.json(users);
+});
+
+app.post("/chatroom", (req, res) => {
+  const { userId, username } = req.body;
   users.push({
+    userId: users.length + 1,
     username: username,
   });
   res.json({ success: "true", message: "user has joined chat" });
 });
 
-app.get("/chatroom/chat", (req, res) => {
-  res.json(users);
+app.get("/chatroom/:userId", (req, res) => {
+  console.log(req.params);
+  const userId = req.params.userId;
+  const currentUser = users.filter((user) => {
+    return user.userId == userId;
+  });
+  res.json(currentUser);
 });
 
 global.userMovies = [
