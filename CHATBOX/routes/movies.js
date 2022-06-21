@@ -9,6 +9,10 @@ router.get("/create-movie", (req, res) => {
   res.render("create-movie");
 });
 
+router.get("/hello", (req, res) => {
+  res.send("hello world");
+});
+
 router.post("/create-movie", (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
