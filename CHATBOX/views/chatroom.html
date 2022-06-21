@@ -1,35 +1,48 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+
+
   <link rel="stylesheet" href="/css/style.css">
+  <title>Chat Feature</title>
 </head>
 
 <body>
-  <h2 id="termsAndConditions"></h2>
-  <div id="chatContainer" class="hidden">
-    <div class="bubbleWrapper">
-      <div class="inlineContainer">
-        <img class="inlineIcon" src="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png">
-        <div class="otherBubble other">
-          <ul id="messagesUL"></ul>
-        </div>
-      </div><span class="other">08:41</span>
+  <header>
+    <div class="navbar">
+      <a class="home-page" href="/movies">Home Page</a>
+      <form method="POST" action="/logout">
+        <input type="hidden" value={{username}} name="username" />
+        <button>Logout</button>
+      </form>
     </div>
+  </header>
+  <main>
+    <section class="chat-container">
+      <div class="bubbleWrapper">
+        <div class="inlineContainer">
+          <div class="otherBubble other">
+            <div id="message-container"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-
-
-
-
-    <input type="text" id="chatTextBox" placeholder="message" />
-    <button id="sendMessageBtn" onclick="getUsername()">Send</button>
-  </div>
-
-
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    var socket = io()
-  </script>
-  <script src="/js/client.js"></script>
+    <section class="container">
+      <div id="sendWrapper">
+        <form id="send-container">
+          <input type="text" id="message-input">
+          <button type="submit" id="send-button">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
 </body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io()
+</script>
+<script src="/js/client.js"></script>
 
 </html>

@@ -1,20 +1,30 @@
-/* .hidden {
-  display: none;
-} */
-
 * {
   font-family: "Avenir";
 }
-.bubbleWrapper {
-  padding: 10px 10px;
+
+.navbar {
   display: flex;
-  justify-content: flex-end;
-  flex-direction: column;
-  align-self: flex-end;
+  justify-content: space-between;
+}
+.home-page {
+  text-decoration: none;
+  color: white;
+}
+body {
+  background-color: #111845;
+}
+.bubbleWrapper {
+  margin-left: 22%;
+  padding: 10px 10px;
+  /* display: flex;
+  flex-direction: row;
+  align-self: flex-end; */
   color: #fff;
+  /* justify-content: center;
+  width: 80%; */
 }
 .inlineContainer {
-  display: inline-flex;
+  /* display: inline-flex; */
 }
 .inlineContainer.own {
   flex-direction: row-reverse;
@@ -23,24 +33,16 @@
   width: 20px;
   object-fit: contain;
 }
-.ownBubble {
-  min-width: 60px;
-  max-width: 700px;
-  padding: 14px 18px;
-  margin: 6px 8px;
-  background-color: #5b5377;
-  border-radius: 16px 16px 0 16px;
-  border: 1px solid #443f56;
-}
-.otherBubble {
+
+/* .otherBubble {
   min-width: 60px;
   max-width: 700px;
   padding: 14px 18px;
   margin: 6px 8px;
   background-color: #6c8ea4;
-  border-radius: 16px 16px 16px 0;
+  border-radius: 16px 16px 16px;
   border: 1px solid #54788e;
-}
+} */
 .own {
   align-self: flex-end;
 }
@@ -51,4 +53,33 @@ span.own,
 span.other {
   font-size: 14px;
   color: grey;
+}
+.chat-container {
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+}
+/* #message-container div:nth-child(2n) {
+  background-color: #6c8ea4;
+} */
+
+#sendWrapper {
+  /* position: fixed;
+  bottom: 10px; */
+  right: 232px;
+  width: 509px;
+  text-align: center;
+  padding: 25px 161px;
+  background: #6c8ea4;
+  border-radius: 5px;
+}
+
+#message-input {
+  width: 100%;
 }

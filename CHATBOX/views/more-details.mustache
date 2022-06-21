@@ -6,7 +6,8 @@
 </head>
 
 <body>
-  <ul>
+  {{>menu}}
+  <ul class="more-details-ul">
     <div class="container">
       <div class="background-img">
         <div class="box">
@@ -21,15 +22,18 @@
                 <img id="movie-img" src="{{posterURL}}" style="height:250px; width:auto;" />
               </div>
               <b>Title:</b> {{title}}
-              <p>Description: {{description}}</p>
-              <p>Genre: {{genre}}</p>
-            </li>
-            {{/userMovies}}
           </div>
 
         </div>
       </div>
     </div>
+    <p class="container"><b>Description:</b> {{description}}</p><br>
+    <br>
+    <div>
+      <p>Genre: {{genre}}</p>
+    </div>
+    </li>
+    {{/userMovies}}
   </ul>
 </body>
 

@@ -1,168 +1,36 @@
-const chatTextBox = document.getElementById("chatTextBox");
-const sendMessageBtn = document.getElementById("sendMessageBtn");
-const messagesUL = document.getElementById("messagesUL");
-const chatContainer = document.getElementById("chatContainer");
-const termsAndConditions = document.getElementById("termsAndConditions");
+const messageForm = document.getElementById("send-container");
+const messageContainer = document.getElementById("message-container");
+const messageInput = document.getElementById("message-input");
+const date = new Date().toLocaleTimeString();
 
-const displayChat = () => {
-  chatContainer.classList.remove("hidden");
-};
-const removeTerms = () => {
-  termsAndConditions.classList.add("hidden");
-};
+const name = prompt(
+  "By entering your name below, you agree to using the chat for movie disucssion only? Sign your name below:"
+);
+appendMessage("you joined");
+socket.emit("new-user", name);
 
-const getUsername = function (userId) {
-  displayChat();
-  removeTerms();
-  fetch(`http://localhost:8080/chatroom`)
-    .then((response) => response.json())
-    .then((results) => {
-      const chatText = chatTextBox.value;
-      const userItems = results.map(function (user) {
-        let onlineUser = user.username;
-        let userId = user.userId;
-        const chat = {
-          userId: userId,
-          username: onlineUser,
-          message: chatText,
-        };
-        termsAndConditions.innerHTML = `<button onclick="renderUsername('${chat.userId}')"> hi</button>`;
-        socket.emit("chatroom", chat);
-      });
-    });
-};
-
-function renderUsername(chat) {
-  const userId = chat;
-  fetch(`http://localhost:8080/chatroom/${userId}`)
-    .then((response) => response.json())
-    .then((results) => {
-      console.log(results);
-      console.log(results[0].username);
-      const date = new Date().toLocaleTimeString();
-      const messageItem = `<li>${results[0].username} messaged at ${date}: </li>`;
-      messagesUL.insertAdjacentHTML("beforeend", messageItem);
-    });
-}
-
-socket.on("chatroom", (chat) => {
-  console.log(chat);
-  fetch(`http://localhost:8080/chatroom/${chat.userId}`)
-    .then((response) => response.json())
-    .then((results) => {
-      console.log(results);
-      chatTextBox.value = "";
-      const messageItem = `<li>${chat.message}</li>`;
-      messagesUL.insertAdjacentHTML("beforeend", messageItem);
-    });
+socket.on("chat-message", (data) => {
+  appendMessage(`Received ${date}   ${data.name}  Says:   ${data.message}`);
 });
 
-// const chatTextBox = document.getElementById("chatTextBox");
-// const sendMessageBtn = document.getElementById("sendMessageBtn");
-// const messagesUL = document.getElementById("messagesUL");
-// const chatContainer = document.getElementById("chatContainer");
-// const termsAndConditions = document.getElementById("termsAndConditions");
+socket.on("user-connected", (name) => {
+  appendMessage(`${name} connected`);
+});
 
-// const displayChat = () => {
-//   chatContainer.classList.remove("hidden");
-// };
-// const removeTerms = () => {
-//   termsAndConditions.classList.add("hidden");
-// };
+socket.on("user-disconnected", (name) => {
+  appendMessage(`${name} disconnected`);
+});
 
-// const getUsername = function (userId) {
-//   displayChat();
-//   removeTerms();
-//   fetch(`http://localhost:8080/chatroom`)
-//     .then((response) => response.json())
-//     .then((results) => {
-//       const chatText = chatTextBox.value;
-//       const userItems = results.map(function (user) {
-//         let onlineUser = user.username;
-//         let userId = user.userId;
-//         const chat = {
-//           userId: userId,
-//           username: onlineUser,
-//           message: chatText,
-//         };
-//         termsAndConditions.innerHTML = `<button onclick="what('${chat.userId}')"> hi</button>`;
-//         socket.emit("chatroom", chat);
-//       });
-//     });
-// };
+messageForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const message = messageInput.value;
+  appendMessage(`Sent at ${date} You: ${message}`);
+  socket.emit("send-chat-message", message);
+  messageInput.value = "";
+});
 
-// function what(chat) {
-//   const userId = chat;
-//   fetch(`http://localhost:8080/chatroom/${userId}`)
-//     .then((response) => response.json())
-//     .then((results) => {
-//       console.log(results);
-//       console.log(results[0].username);
-//       const date = new Date().toLocaleTimeString();
-//       const messageItem = `<li>${results[0].username} messaged at ${date}: </li>`;
-//       messagesUL.insertAdjacentHTML("beforeend", messageItem);
-//     });
-// }
-
-// socket.on("chatroom", (chat) => {
-//   console.log(chat);
-//   fetch(`http://localhost:8080/chatroom/${chat.userId}`)
-//     .then((response) => response.json())
-//     .then((results) => {
-//       console.log(results);
-//       chatTextBox.value = "";
-//       const messageItem = `<li>${chat.message}</li>`;
-//       messagesUL.insertAdjacentHTML("beforeend", messageItem);
-//     });
-// });
-// const chatTextBox = document.getElementById("chatTextBox");
-// const sendMessageBtn = document.getElementById("sendMessageBtn");
-// const messagesUL = document.getElementById("messagesUL");
-// const chatContainer = document.getElementById("chatContainer");
-// const termsAndConditions = document.getElementById("termsAndConditions");
-
-// const displayChat = () => {
-//   chatContainer.classList.remove("hidden");
-// };
-// const removeTerms = () => {
-//   termsAndConditions.classList.add("hidden");
-// };
-
-// const fetchUsername = function () {
-//   fetch("http://localhost:8080/chatroom")
-//     .then((response) => response.json())
-//     .then((results) => {
-//       console.log(results);
-//       const userItems = results.map(function (user) {
-//         termsAndConditions.innerHTML = `
-//       <div><p>
-//         Do you agree to Chat <a href="#">terms and conditions</a>?
-//         </p><button id="startChat" onclick="getUsername(${user.userId})">
-//           Start Chatting Now
-//         </button>
-//       </div>`;
-//       });
-//     });
-// };
-// fetchUsername();
-
-// const getUsername = function (userId) {
-//   displayChat();
-//   removeTerms();
-//   fetch(`http://localhost:8080/chatroom/${userId}`)
-//     .then((response) => response.json())
-//     .then((results) => {
-//       sendMessageBtn.addEventListener("click", () => {
-//         const chatText = chatTextBox.value;
-//         const chat = { message: chatText };
-//         socket.emit("chatroom", chat);
-
-//         const date = new Date().toLocaleTimeString();
-//         const messageItem = `<li>${results[0].username} messaged at ${date}: ${chat.message}</li>`;
-//         messagesUL.insertAdjacentHTML("beforeend", messageItem);
-//       });
-//     });
-// };
-// socket.on("chatroom", (chat) => {
-//   chatTextBox.value = "";
-// });
+function appendMessage(message) {
+  const messageElement = document.createElement("div");
+  messageElement.innerText = message;
+  messageContainer.append(messageElement);
+}

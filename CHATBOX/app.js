@@ -7,14 +7,17 @@ const session = require("express-session");
 const { use } = require("./routes/movies");
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
+const path = require("path");
+const VIEWS_PATH = path.join(__dirname, "/views");
 // const loginRouter = require("./routes/user-login");
 
 app.use(express.static("static"));
 app.use("/js", express.static("static"));
 app.use("/css", express.static("static"));
+app.use("/img", express.static("static"));
 
-app.engine("mustache", mustacheExpress());
-app.set("views", "./views");
+app.engine("mustache", mustacheExpress(VIEWS_PATH + "/partials", ".mustache"));
+app.set("views", VIEWS_PATH);
 app.set("view engine", "mustache");
 
 app.use(express.urlencoded());
@@ -110,37 +113,29 @@ app.post("/logout", (req, res) => {
   res.redirect("/user-login");
 });
 
+chatUsers = {};
+
 io.on("connection", (socket) => {
   console.log("The user is connected");
-  socket.on("chatroom", (chat) => {
-    io.emit("chatroom", chat);
+  socket.on("new-user", (name) => {
+    chatUsers[socket.id] = name;
+    socket.broadcast.emit("user-connected", name);
+  });
+  socket.on("send-chat-message", (message) => {
+    socket.broadcast.emit("chat-message", {
+      message: message,
+      name: chatUsers[socket.id],
+    });
+
+    socket.on("disconnect", () => {
+      socket.broadcast.emit("user-disconnected", chatUsers[socket.id]);
+      delete chatUsers[socket.id];
+    });
   });
 });
 
 app.post("/chatroom", (req, res) => {
   res.sendFile(__dirname + "/views/chatroom.html");
-});
-
-app.get("/chatroom", (req, res) => {
-  res.json(users);
-});
-
-app.post("/chatroom", (req, res) => {
-  const { userId, username } = req.body;
-  users.push({
-    userId: users.length + 1,
-    username: username,
-  });
-  res.json({ success: "true", message: "user has joined chat" });
-});
-
-app.get("/chatroom/:userId", (req, res) => {
-  console.log(req.params);
-  const userId = req.params.userId;
-  const currentUser = users.filter((user) => {
-    return user.userId == userId;
-  });
-  res.json(currentUser);
 });
 
 global.userMovies = [
@@ -170,6 +165,23 @@ global.userMovies = [
     genre: "Adventure",
     posterURL:
       "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQgzoCW9Kqn-U1oXDPe40aWb28zN2FwbBRjmFbr6DZNPdiaLIHh",
+  },
+  {
+    movieId: 4,
+    title: "Hereditary",
+    description:
+      "daughter and grandchildren begin to unravel cryptic and increasingly terrifying secrets about their ancestry, trying to outrun the sinister fate they have inherited.",
+    genre: "Horror",
+    posterURL:
+      "https://m.media-amazon.com/images/M/MV5BOTU5MDg3OGItZWQ1Ny00ZGVmLTg2YTUtMzBkYzQ1YWIwZjlhXkEyXkFqcGdeQXVyNTAzMTY4MDA@._V1_FMjpg_UX1000_.jpg",
+  },
+  {
+    movieId: 5,
+    title: "The Witch",
+    description:
+      "panic and despair envelops a farmer, his wife and their children when youngest son Samuel suddenly vanishes",
+    genre: "Horror",
+    posterURL: "https://i.ebayimg.com/images/g/YkYAAOSwQYZWumIk/s-l400.jpg",
   },
 ];
 

@@ -5,70 +5,69 @@
 </head>
 
 <body>
-  <header>
-    <form method="POST" action="/chatroom">
-      <input type="hidden" value={{username}} name="username" />
-      <button>Take Me to Chat</button>
-    </form>
-    <form method="POST" action="/logout">
-      <input type="hidden" value={{username}} name="username" />
-      <button>Logout</button>
-    </form>
-  </header>
-  <h1>Viewing Your Collection!</h1><br>
-  <div class="form">
+  {{>menu}}
 
-    <a id="add-movies" href="/movies/create-movie">Add More Movies</a>
-    <br>
-    <form method="POST" action="/movies/genre">
-      <select name="genre" id="genre">
-        <option value="">Select Movie Genre</option>
-        <option value="Adventure">Adventure</option>
-        <option value="Comedy">Comedy</option>
-        <option value="Family">Family</option>
-        <option value="Horror">Horror</option>
-        <option value="Romance">Romance</option>
-      </select>
-      <button>Show genres</button>
-    </form>
+  <div class="jumbotron jumbotron-fluid bg-dark text-white">
+    <div class="container bg-dark text-white">
+      <h1 class="display-6">Viewing Your Collection!</h1>
+      <p class="lead">
+      <div class="form">
+        <a id="add-movies" href="/movies/create-movie">Add More Movies</a>
+        <br>
+        <form method="POST" action="/movies/genre">
+          <select name="genre" id="genre">
+            <option value="">Select Movie Genre</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Family">Family</option>
+            <option value="Horror">Horror</option>
+            <option value="Romance">Romance</option>
+          </select>
+          <button>Show genres</button>
+        </form>
+      </div>
+      <ul>
+    </div>
   </div>
-  <ul>
-    {{#userMovies}}
-    <li>
-      <div class="container">
-        <div class="background-img">
-          <div class="box">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <div class="content">
-              <div>
-                <img id="movie-img" src="{{posterURL}}" style="height:250px; width:auto;" />
-              </div>
-              <b>Title:</b> {{title}}
 
-              <form method="POST" action="/movies/more-details">
-                <input type="hidden" value={{movieId}} name="movieId" />
-                <button>More Details</a></button>
-              </form>
+  {{#userMovies}}
 
-
-              <form method="POST" action="/movies/delete-movie">
-                <input type="hidden" value={{movieId}} name="movieId" />
-                <button>Delete</button>
-              </form>
+  <li>
+    <div class="wrapper">
+      <div class="background-img">
+        <div class="box">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <div class="content">
+            <div>
+              <img id="movie-img" src="{{posterURL}}" style="height:250px; width:auto;" />
             </div>
+            <b>Title:</b> {{title}}
 
+            <form method="POST" action="/movies/more-details">
+              <input type="hidden" value={{movieId}} name="movieId" />
+              <button>More Details</a></button>
+            </form>
+
+
+            <form method="POST" action="/movies/delete-movie">
+              <input type="hidden" value={{movieId}} name="movieId" />
+              <button>Delete</button>
+            </form>
           </div>
+
         </div>
       </div>
-    </li>
-    {{/userMovies}}
-    {{^userMovies}}
-    <h3>Oh No! Your collection is empty!</h3>
+    </div>
+  </li>
 
-    {{/userMovies}}
+  {{/userMovies}}
+  {{^userMovies}}
+  <h3>Oh No! Your collection is empty!</h3>
+
+  {{/userMovies}}
   </ul>
 </body>
 
