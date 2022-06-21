@@ -1,13 +1,16 @@
 # Back-End
 
-## Movie Server with Chat Feaature Final Product
+## Movie Server with Chat Faature Final Product
 
 Summary: Add socket.io to movie server to enable a chatroom feature.
 
 Site Preview:
 
 <div id="site-preview" align="center">
-  <img src="images/chatpreview.gif" width="100%"/>
+  <img src="images/site.png" width="100%"/>
+</div>
+<div id="site-preview" align="center">
+  <img src="images/chat-preview.gif" width="100%"/>
 </div>
 
 Instructions:
