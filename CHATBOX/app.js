@@ -9,6 +9,8 @@ const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const path = require("path");
 const VIEWS_PATH = path.join(__dirname, "/views");
+const PORT = process.env.PORT || 8080;
+
 // const loginRouter = require("./routes/user-login");
 
 app.use(express.static("static"));
