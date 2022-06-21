@@ -10,6 +10,9 @@ Site Preview:
   <img src="images/site.png" width="100%"/>
 </div>
 <div id="site-preview" align="center">
+  <img src="images/site2.png" width="100%"/>
+</div>
+<div id="site-preview" align="center">
   <img src="images/chat-preview.gif" width="100%"/>
 </div>
 
