@@ -9,11 +9,19 @@
 </head>
 
 <body>
+  <a id="add-blog" href="/add-blog">Write a new Blog!</a>
 
   {{#posts}}
   <h1>{{title}}</h1>
   <p>{{body}}</p>
-
+  <spam>{{date_created}} {{date_updated}} {{is_published}}</spam>
+  <form method="POST" action="/delete-blog">
+    <input type="hidden" value={{post_id}} name="post_id" />
+    <button>Delete</button>
+  </form>
+  {{/posts}}
+  {{^posts}}
+  <h3>Create a Blog Post now!</h3>
   {{/posts}}
 
 </body>
