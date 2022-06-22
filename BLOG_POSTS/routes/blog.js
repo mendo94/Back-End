@@ -36,12 +36,11 @@ router.post("/add-blog", (req, res) => {
   const body = req.body.body;
   // const age = parseInt(req.body.);
 
-  db.none(
-    `INSERT INTO posts (title, body) VALUES('${title}', '${body}')`
-    //#10 data will be injected in this order
-  ).then(() => {
-    res.redirect("/");
-  });
+  db.none("INSERT INTO posts (title, body) VALUES($1, $2)", [title, body]).then(
+    () => {
+      res.redirect("/");
+    }
+  );
 });
 
 router.get("/add-blog", (req, res) => {

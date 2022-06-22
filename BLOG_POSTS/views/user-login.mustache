@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log into your Account</title>
+</head>
+
+<body>
+  {{bootstrap}}
+  <h1>Login Page</h1>
+
+
+  <form class="form-inline" action="/user-login" method="POST">
+
+    <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+    <input type="text" name="username" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2"
+      placeholder="username" />
+
+    <label class="sr-only" for="inlineFormInputName2">Password</label>
+    <input class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="password" type="password"
+      name="password" />
+
+    <button type="submit" class="btn btn-primary mb-2">Submit
+
+    </button>
+  </form>
+</body>
+
+</html>
