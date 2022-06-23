@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create new thought here</title>
+</head>
+
+<body>
+  <h1>Create a new Blog</h1>
+
+  <form method="POST" action="/create-blog">
+    <div>
+
+      <label for="title">Title
+        <input type="text" name="title" id="title" placeholder="Give your blog post a title">
+      </label>
+
+      <label for="body">Body
+        <textarea type="text" name="body" id="body" placeholder="Enter description"></textarea>
+      </label>
+
+      <label for="category">Category
+        <input type="text" name="category" id="category" placeholder="Enter category">
+      </label>
+
+      <button>Submit</button>
+    </div>
+  </form>
+</body>
+
+</html>
