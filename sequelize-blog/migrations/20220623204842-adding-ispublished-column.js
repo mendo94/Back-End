@@ -2,15 +2,12 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return Promise.all([
-      queryInterface.addColumn("isPublished", false, {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-      }),
-    ]);
+    return queryInterface.addColumn("Blogs", "isPublished", {
+      type: Sequelize.BOOLEAN,
+    });
   },
 
   async down(queryInterface, Sequelize) {
-    return Promise.all([queryInterface.removeColumn("isPublished", false)]);
+    return queryInterface.removeColumn("Blogs", "isPublished");
   },
 };
