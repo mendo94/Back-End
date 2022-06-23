@@ -1,6 +1,6 @@
 const express = require("express");
 const userRouter = express.Router();
-var bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 
 userRouter.get("/registration", (req, res) => {
   res.render("registration");
@@ -54,11 +54,13 @@ userRouter.post("/user-login", (req, res) => {
       .then((result) => {
         if (result) {
           if (req.session) {
-            req.session.id = user.id;
+            req.session.user = { user_id: user.id, username: user.username };
           }
           res.redirect("/blog");
         } else {
-          res.render("login", { message: "Invalid username or password!" });
+          res.render("user-login", {
+            message: "Invalid username or password!",
+          });
         }
       })
       .catch((error) => {

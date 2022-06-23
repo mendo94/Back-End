@@ -1,9 +1,18 @@
 const express = require("express");
 const router = express.Router();
 
+// router.get("/", (req, res) => {
+//   res.render("index", {
+//     username: req.session.user.username,
+//   });
+// });
+
 router.get("/", (req, res) => {
+  const userId = req.session.user.user_id;
+
   db.any(
-    "SELECT post_id, title, body, date_created, date_updated, is_published FROM posts"
+    "SELECT post_id, title, body, date_created, date_updated, is_published, user_id FROM posts WHERE user_id = $1",
+    [userId]
   )
     .then((posts) => {
       console.log(posts);
@@ -14,37 +23,32 @@ router.get("/", (req, res) => {
     });
 });
 
-// router.get("/:post_id", (req, res) => {
-//   const post_id = parseInt(req.params.post_id);
-//   db.one(
-//     "SELECT post_id, title, body, date_created, date_updated, is_published FROM posts WHERE post_id = $1",
-//     [post_id]
-//   ).then((post) => {
-//     res.render("blog-detail", post);
-//   });
-// });
+router.post("/add-blog", (req, res) => {
+  const title = req.body.title;
+  const body = req.body.body;
+  // const username = req.session.username;
+  const userId = req.session.user.user_id;
+  console.log(userId);
+  // const age = parseInt(req.body.);
+
+  db.none("INSERT INTO posts(title, body, user_id) VALUES($1, $2, $3)", [
+    title,
+    body,
+    userId,
+  ]).then(() => {
+    res.redirect("/blog");
+  });
+});
+
+router.get("/add-blog", (req, res) => {
+  res.render("add-blog");
+});
 
 router.post("/delete-blog", (req, res) => {
   const post_id = parseInt(req.body.post_id);
   db.none("DELETE FROM posts WHERE post_id = $1", [post_id]).then(() => {
     res.redirect("/");
   });
-});
-
-router.post("/add-blog", (req, res) => {
-  const title = req.body.title; //#9 use db.none to insert the data
-  const body = req.body.body;
-  // const age = parseInt(req.body.);
-
-  db.none("INSERT INTO posts (title, body) VALUES($1, $2)", [title, body]).then(
-    () => {
-      res.redirect("/");
-    }
-  );
-});
-
-router.get("/add-blog", (req, res) => {
-  res.render("add-blog");
 });
 
 module.exports = router;

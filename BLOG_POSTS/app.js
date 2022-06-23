@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const pgp = require("pg-promise")();
 const mustacheExpress = require("mustache-express");
-var session = require("express-session");
+const session = require("express-session");
 const blogRouter = require("./routes/blog");
 const userRouter = require("./routes/users");
 const path = require("path");
@@ -19,7 +19,7 @@ app.use(
   session({
     secret: "THISSECRETKEY",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
   })
 );
 
@@ -32,6 +32,29 @@ app.use("/blog", blogRouter);
 app.use("/", blogRouter);
 app.use("/users", userRouter);
 
+app.post("/add-comment", (req, res) => {
+  const comment = req.body.comment;
+
+  db.none("INSERT INTO comments(comment) VALUES($1)", [comment]).then(() => {
+    res.redirect("/blog");
+  });
+});
+
+app.get("/add-comment", (req, res) => {
+  res.render("add-comment");
+});
+
+app.get("/", (req, res) => {
+  db.any("SELECT comment FROM comments WHERE comment = $1", [comment])
+    .then((comments) => {
+      console.log(comments);
+      res.render("add-comment", { comments: comments });
+    })
+    .catch((error) => {
+      res.render("add-comment", { message: "Unable to get data" });
+    });
+});
+
 app.get("/my-profile", (req, res) => {
   const user_id = req.session.user_id;
   console.log(user_id);
@@ -39,7 +62,8 @@ app.get("/my-profile", (req, res) => {
   db.any("SELECT post_id, title, body FROM posts WHERE user_id = $1", [
     user_id,
   ]).then((posts) => {
-    res.render("my-profile", { posts: posts });
+    // res.render("my-profile", { posts: posts });
+    console.log(posts);
   });
 });
 
