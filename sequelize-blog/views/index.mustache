@@ -8,15 +8,42 @@
   <title>Document</title>
 </head>
 
-<body>
+<body style="background-color: gray;">
   <a href="/create-blog">Create new post!</a>
+
+
+  <form action="/filter" method="POST">
+
+    <label for="category">Sort By Category</label>
+    <select name="category" id="category">
+      <option value="">Select category</option>
+      <option value="Burning Thoughts">Burning Thoughts</option>
+      <option value="Burning Questions">Burning Questions</option>
+      <option value="Hypotheticals">Hypotheticals</option>
+      <option value="TMI">TMI</option>
+      <option value="Teaching Moments">Teaching Moments</option>
+    </select>
+    <button>Filter Posts</button>
+    <!--  <a href="/filter/{{category}}"><button>Filter Posts</button></a>-->
+  </form>
+  <ul>
+
+    <li>
+
+      {{#categories}}
+      <h2>{{title}}</h2>
+      <p>{{body}}</p>
+      <span>Category: {{category}}</span>
+      {{/categories}}
+    </li>
+  </ul>
   <ul>
     {{#blogs}}
 
     <li>
       <h2>{{title}}</h2>
       <p>{{body}}</p>
-      <span>{{category}}</span>
+      <span>Category: {{category}}</span>
 
       <a href="/update-blog/{{id}}"><button>Update Blog</button></a>
       <a href="/delete-blog/{{id}}"><button>Delete</button></a>

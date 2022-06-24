@@ -21,9 +21,20 @@
         <textarea type="text" name="body" id="body" placeholder="Enter description">{{body}}</textarea>
       </label>
 
-      <label for="category">Category
+      <label for="category">Choose a category</label>
+      <select name="category" id="category">
+        <option value="{{category}}">{{category}}</option>
+        <option value="Burning Thoughts">Burning Thoughts</option>
+        <option value="Burning Questions">Burning Questions</option>
+        <option value="Hypotheticals">Hypotheticals</option>
+        <option value="TMI">TMI</option>
+        <option value="Teaching Moments">Teaching Moments</option>
+      </select>
+
+      <!-- <label for="category">Category
         <input type="text" name="category" value="{{category}}" id="category" placeholder="Enter category">
-      </label>
+      </label> -->
+
 
       <button>Submit</button>
     </div>
